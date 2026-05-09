@@ -20,7 +20,7 @@ export default function App() {
       const response = await axios.get(`https://api.github.com/repos/${repo}/commits`);
       setCommits(response.data);
     } catch (err) {
-      setError('Repository not found or API limit reached.');
+      setError('Repository not found or API limit reached!');
       setCommits([]);
     } finally {
       setLoading(false);
