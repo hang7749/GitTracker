@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Colors } from '../theme/colors';
 
-export default function RepoCard({ item, onPress }) {
+export default function RepoCard({ item, onPress, isUnread }) {
   return (
     <TouchableOpacity style={styles.repoCard} onPress={onPress}>
       <View style={styles.repoHeader}>
@@ -22,6 +22,8 @@ export default function RepoCard({ item, onPress }) {
         <Text style={styles.repoInfoText}>{item.language || "Plain Text"}</Text>
         <Text style={styles.repoInfoText}>⭐ {item.stargazers_count}</Text>
       </View>
+
+      {isUnread && <View style={styles.unreadDot} />}
     </TouchableOpacity>
   );
 }
@@ -43,4 +45,14 @@ const styles = StyleSheet.create({
   repoDesc: { color: Colors.muted, fontSize: 14, marginVertical: 8 },
   repoFooter: { flexDirection: 'row', gap: 15 },
   repoInfoText: { color: Colors.text, fontSize: 12 },
+  unreadDot: {
+    position: 'absolute',
+    top: 10,
+    right: 10,
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: '#FF453A', // System Red
+    zIndex: 1,
+  },
 });
