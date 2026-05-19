@@ -9,6 +9,7 @@ import * as Notifications from 'expo-notifications';
 // Internal Imports
 import RepoListScreen from './src/screens/RepoListScreen';
 import CommitScreen from './src/screens/CommitScreen';
+import CommitDetailScreen from './src/screens/CommitDetailScreen';
 import { Colors } from './src/theme/colors';
 
 const Stack = createStackNavigator();
@@ -67,6 +68,7 @@ export default function App() {
               options={{ headerShown: false }} 
             />
             <Stack.Screen name="Commits" component={CommitScreen} />
+            <Stack.Screen name="CommitDetail" component={CommitDetailScreen} options={{ title: 'Review Changes' }} />
           </Stack.Navigator>
         </NavigationContainer>
       </View>

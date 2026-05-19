@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 // Added FlatList to this line below
-import { View, Text, FlatList, ActivityIndicator, StyleSheet } from 'react-native'; 
+import { View, Text, FlatList, ActivityIndicator, StyleSheet, TouchableOpacity } from 'react-native'; 
 import { api } from '../api/github';
 import { Colors } from '../theme/colors';
 import CommitItem from '../components/CommitItem';
 
-export default function CommitScreen({ route }) {
+export default function CommitScreen({ route, navigation }) {
   const { fullName } = route.params;
   const [commits, setCommits] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -28,7 +28,16 @@ export default function CommitScreen({ route }) {
           ListHeaderComponent={() => (
             <Text style={styles.listHeader}>Recent Activity ({commits.length})</Text>
           )}
-          renderItem={({ item }) => <CommitItem item={item} />}
+          renderItem={({ item }) => (
+            <TouchableOpacity 
+              onPress={() => navigation.navigate('CommitDetail', { 
+                fullName: fullName, 
+                sha: item.sha 
+              })}
+            >
+              <CommitItem item={item} />
+            </TouchableOpacity>
+          )}
           contentContainerStyle={{ paddingBottom: 20 }}
         />
       )}
