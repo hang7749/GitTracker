@@ -1,11 +1,18 @@
+// github.js
 import axios from 'axios';
-
-const GITHUB_TOKEN = process.env.EXPO_PUBLIC_GITHUB_TOKEN;
 
 export const api = axios.create({
   baseURL: 'https://api.github.com',
   headers: {
-    Authorization: `token ${GITHUB_TOKEN}`,
     Accept: 'application/vnd.github.v3+json',
   },
 });
+
+// Call this function when the app boots up or when the user enters a new token
+export const setAuthToken = (token) => {
+  if (token) {
+    api.defaults.headers.common['Authorization'] = `token ${token}`;
+  } else {
+    delete api.defaults.headers.common['Authorization'];
+  }
+};

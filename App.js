@@ -9,6 +9,7 @@ import * as NavigationBar from 'expo-navigation-bar';
 import RepoListScreen from './src/screens/RepoListScreen';
 import CommitScreen from './src/screens/CommitScreen';
 import CommitDetailScreen from './src/screens/CommitDetailScreen';
+import TokenInputScreen from './src/screens/TokenInputScreen'; // 1. Import your new screen
 import { Colors } from './src/theme/colors';
 
 const Stack = createStackNavigator();
@@ -42,6 +43,7 @@ export default function App() {
               headerTintColor: Colors.text,
             }}
           >
+            {/* Main Application Flow */}
             <Stack.Screen 
               name="Repositories" 
               component={RepoListScreen} 
@@ -49,6 +51,16 @@ export default function App() {
             />
             <Stack.Screen name="Commits" component={CommitScreen} />
             <Stack.Screen name="CommitDetail" component={CommitDetailScreen} options={{ title: 'Review Changes' }} />
+            
+            {/* 2. Added the Token Setup Screen as a Modal */}
+            <Stack.Screen 
+              name="TokenInput" 
+              component={TokenInputScreen} 
+              options={{ 
+                title: 'GitHub Authentication',
+                presentation: 'modal', // Makes it slide up from the bottom on iOS
+              }} 
+            />
           </Stack.Navigator>
         </NavigationContainer>
       </View>
